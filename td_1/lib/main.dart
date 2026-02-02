@@ -7,6 +7,8 @@ void main() {
   runApp(const MaterialApp(
       debugShowCheckedModeBanner: false,
       title: "Application Quizz",
-      home: MyWidget(Colors.teal,40.0,"Message du widget")
+      home: MyWidget(
+          color: Colors.teal,
+          textSize: 40.0)
   ));
 }
