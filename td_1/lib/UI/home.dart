@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
-import 'myButtons.dart';
 import '../model/question.dart';
 
 class MyWidget extends StatefulWidget {
   final Color color;
   final double textSize;
-  final ButtonStyle? btnStyle;
   const MyWidget({
     super.key,
     required this.color,
     required this.textSize,
-    this.btnStyle,
   });
   @override
   State<MyWidget> createState() => _MyWidgetState();
@@ -60,7 +57,7 @@ class _MyWidgetState extends State<MyWidget> {
                         ),
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.black.withOpacity(0.5),
+                            color: Colors.black,
                             spreadRadius: 2,
                             blurRadius: 10,
                             offset: const Offset(5, 5),
@@ -85,22 +82,10 @@ class _MyWidgetState extends State<MyWidget> {
                 Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      ElevatedButton(onPressed: ()=> _previousQuestion(),
-                        style: myButtonStyle,
-                        child: const Icon(Icons.arrow_back, color:
-                        Colors.white,),),
-                      ElevatedButton(onPressed: ()=> _checkAnswer(true, context),
-                        style: myButtonStyle,
-                        child: const Text("TRUE",style: TextStyle(color:
-                        Colors.white)),),
-                      ElevatedButton(onPressed: ()=> _checkAnswer(false, context),
-                        style: myButtonStyle,
-                        child: const Text("FALSE",style: TextStyle(color:
-                        Colors.white)),),
-                      ElevatedButton(onPressed: ()=> _nextQuestion(),
-                        style: myButtonStyle,
-                        child: const Icon(Icons.arrow_forward, color:
-                        Colors.white,),),
+                      MyIconButton(Icons.arrow_back, _previousQuestion),
+                      MyTextButton("TRUE", true, _checkAnswer),
+                      MyTextButton("FALSE", false, _checkAnswer),
+                      MyIconButton(Icons.arrow_forward, _nextQuestion)
                     ])
               ]
             )
@@ -120,7 +105,7 @@ class _MyWidgetState extends State<MyWidget> {
     });
   }
 
-  void _checkAnswer(bool choice, BuildContext context) {
+  void _checkAnswer(bool choice) {
     if (choice == _questions[_currentQuestion].isCorrect){
       debugPrint("good");
       const mySnackBar = SnackBar(
@@ -153,5 +138,36 @@ class _MyWidgetState extends State<MyWidget> {
       ScaffoldMessenger.of(context).showSnackBar(mySnackBar);
     }
     _nextQuestion();
+  }
+}
+
+class MyIconButton extends StatelessWidget {
+  final IconData myIcon;
+  final VoidCallback myAction;
+  const MyIconButton(this.myIcon, this.myAction, {super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      onPressed: ()=> myAction(),
+      child: Icon(myIcon, color: Colors.white,)
+      );
+  }
+}
+
+typedef BoolCallback = void Function(bool value);
+
+class MyTextButton extends StatelessWidget {
+  final String myText;
+  final bool myValue;
+  final BoolCallback myAction;
+  const MyTextButton(this.myText, this.myValue, this.myAction, {super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+        onPressed: ()=> myAction(myValue),
+        child: Text(myText, style: TextStyle(color: Colors.white)),
+      );
   }
 }
