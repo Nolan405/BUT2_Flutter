@@ -19,6 +19,6 @@ void main() {
       title: "Application Quiz",
       home: const MyWidget(
           color: Color(0xFF7BC4DD),
-          textSize: 40.0)
+          textSize: 23.0)
   ));
 }
