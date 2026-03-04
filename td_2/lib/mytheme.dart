@@ -60,8 +60,6 @@ class MyTheme {
     ),
   );
 
-  static get GoogleFonts => null;
-
   // 3
   static ThemeData light() {
     return ThemeData(
