@@ -25,8 +25,8 @@ class _MyAppState extends State<MyApp> {
       body: _vues[_index],
       bottomNavigationBar: BottomNavigationBar(
         items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.task), label: "Tasks"),
-          BottomNavigationBarItem(icon: Icon(Icons.contacts), label: "Contacts"),
+          BottomNavigationBarItem(icon: Icon(Icons.task), label: "Tasks1"),
+          BottomNavigationBarItem(icon: Icon(Icons.task_alt), label: "Task2"),
           BottomNavigationBarItem(icon: Icon(Icons.settings), label: "Settings"),
         ],
         currentIndex: _index,

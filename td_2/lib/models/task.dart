@@ -11,6 +11,17 @@ class Task {
   Task({required this.id,required this.title,required this.tags,required
   this.nbhours,required this.difficulty,required this.description});
 
+  factory Task.fromJson(Map<String, dynamic> json) {
+    return Task(
+        id: json['id'],
+        title: json['title'],
+        tags: List<String>.from(json['tags']),
+        nbhours: json['nbhours'],
+        difficulty: json['difficulty'],
+        description: json['description']
+    );
+  }
+
   static List<Task> generateTask(int i){
     List<Task> tasks=[];
     for(int n=0;n<i;n++){
