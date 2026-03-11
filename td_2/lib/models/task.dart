@@ -11,6 +11,19 @@ class Task {
   Task({required this.id,required this.title,required this.tags,required
   this.nbhours,required this.difficulty,required this.description});
 
+  Task.todo({required this.id, required this.title}):
+      tags = [],
+      nbhours = 0,
+      difficulty = 1,
+      description = "";
+
+  factory Task.todoFromJson(Map<String, dynamic> json) {
+    return Task.todo(
+        id: json['id'],
+        title: json['title']
+    );
+  }
+
   factory Task.fromJson(Map<String, dynamic> json) {
     return Task(
         id: json['id'],

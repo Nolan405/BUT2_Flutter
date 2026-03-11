@@ -27,7 +27,7 @@ class _MyAppState extends State<MyApp> {
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.task), label: "Tasks1"),
           BottomNavigationBarItem(icon: Icon(Icons.task_alt), label: "Task2"),
-          BottomNavigationBarItem(icon: Icon(Icons.settings), label: "Settings"),
+          BottomNavigationBarItem(icon: Icon(Icons.task), label: "Task3"),
         ],
         currentIndex: _index,
         onTap: (int index) {
