@@ -5,9 +5,9 @@ import 'home.dart';
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(MaterialApp(
-    debugShowCheckedModeBanner: false,
-    title: "TD2",
-    home: MyApp(),
-    theme: MyTheme.dark(),
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData.light(),
+      darkTheme: ThemeData.dark(),
+      home: MyApp()
   ));
 }
