@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:dev_mobile/models/task.dart';
+import 'package:provider/provider.dart';
+import '../viewModel/TaskViewModel.dart';
 
 class Vue1 extends StatelessWidget {
   Vue1({super.key});
-  final List<Task> _listTasks = Task.generateTask(20);
+  late List<Task> _listTasks;
   final List<int> colorCodes = <int>[700, 400];
 
   @override
   Widget build(BuildContext context) {
+    _listTasks = context.watch<TaskViewModel>().liste;
     return _listTasks.isNotEmpty
       ? ListView.builder(
         padding: const EdgeInsets.all(15),

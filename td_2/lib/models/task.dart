@@ -1,6 +1,8 @@
 import 'dart:math';
 
 class Task {
+  static int nb = 0;
+
   int id;
   String title;
   List<String> tags;
@@ -23,6 +25,13 @@ class Task {
         title: json['title']
     );
   }
+
+  factory Task.newTask(){
+    nb++;
+    return Task(id: nb, title: 'title $nb', tags: ['tags $nb'], nbhours:
+    nb, difficulty: nb%5, description: 'description $nb');
+  }
+
 
   factory Task.fromJson(Map<String, dynamic> json) {
     return Task(

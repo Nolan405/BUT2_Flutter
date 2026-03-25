@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:settings_ui/settings_ui.dart';
+import 'package:provider/provider.dart';
+import "package:settings_ui/settings_ui.dart";
+
 import '../repository/shared.dart';
 import '../theme/mytheme.dart';
+import '../viewModel/settingViewModel.dart';
 
-
-class EcranSettings extends StatefulWidget {
-  const EcranSettings({Key? key}) : super(key: key);
-
+class EcranSettings extends StatefulWidget{
   @override
   State<EcranSettings> createState() => _EcranSettingsState();
 }
@@ -14,18 +14,17 @@ class EcranSettings extends StatefulWidget {
 class _EcranSettingsState extends State<EcranSettings> {
   bool _dark = true;
 
-  Future<void> _loadSettings() async{
-    bool settings = await SettingRepository().getSettings();
-    setState(() {
-      _dark = settings;
-    });
-  }
-
-
   @override
   void initState() {
     super.initState();
     _loadSettings();
+  }
+
+  Future<void> _loadSettings() async {
+    bool settings = context.read<SettingViewmodel>().isDark;
+    setState(() {
+      _dark = settings;
+    });
   }
 
   @override
@@ -33,43 +32,33 @@ class _EcranSettingsState extends State<EcranSettings> {
     return Center(
       child: SettingsList(
         darkTheme: SettingsThemeData(
-          settingsListBackground: MyTheme
-              .dark()
-              .scaffoldBackgroundColor,
-          settingsSectionBackground: MyTheme
-              .dark()
-              .scaffoldBackgroundColor,
+            settingsListBackground: MyTheme.dark().scaffoldBackgroundColor,
+            settingsSectionBackground: MyTheme.dark().scaffoldBackgroundColor
         ),
         lightTheme: SettingsThemeData(
-          settingsListBackground: MyTheme
-              .light()
-              .scaffoldBackgroundColor,
-          settingsSectionBackground: MyTheme
-              .light()
-              .scaffoldBackgroundColor,
+            settingsListBackground: MyTheme.light().scaffoldBackgroundColor,
+            settingsSectionBackground: MyTheme.light().scaffoldBackgroundColor
         ),
         sections: [
           SettingsSection(
-            title: const Text('Theme'),
-            tiles: [
-              SettingsTile.switchTile(
-                initialValue: _dark,
-                onToggle: _onToggle,
-                title: const Text('Dark mode'),
-                leading: const Icon(Icons.invert_colors),
-              ),
-            ],
-          ),
+              title: const Text('Theme'),
+              tiles: [
+                SettingsTile.switchTile(
+                  initialValue: _dark,
+                  onToggle: _onToggle,
+                  title: const Text('Dark mode'),
+                  leading: const Icon(Icons.invert_colors),
+                )
+              ])
         ],
       ),
     );
   }
 
   void _onToggle(bool value) {
-    debugPrint('value $value');
     setState(() {
-      _dark = value;
-      SettingRepository().saveSettings(_dark);
+      _dark = !_dark;
+      context.read<SettingViewmodel>().isDark = _dark;
     });
   }
 }

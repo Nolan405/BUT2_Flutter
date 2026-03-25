@@ -38,6 +38,7 @@ dependencies:
   http: ^1.6.0
   shared_preferences: ^2.5.4
   settings_ui: ^2.0.2
+  provider: ^6.1.1
 
 dev_dependencies:
   flutter_test:
