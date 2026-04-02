@@ -1,13 +1,9 @@
 import 'package:dev_mobile/UI/EcranSettings.dart';
-import 'package:dev_mobile/viewModel/TaskViewModel.dart';
 import 'package:flutter/material.dart';
 import 'package:dev_mobile/UI/vue1.dart';
 import 'package:dev_mobile/UI/vue2.dart';
 import 'package:dev_mobile/UI/vue3.dart';
-import 'package:http/http.dart';
-
-import 'models/addTask.dart';
-import 'models/task.dart';
+import 'form/taskForm.dart';
 
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
@@ -26,7 +22,7 @@ class _MyAppState extends State<MyApp> {
       floatingActionButton: _index==0?FloatingActionButton(
         onPressed: (){
           Navigator.push(context, MaterialPageRoute(
-            builder: (context) => AddTask(),
+            builder: (context) => Taskform(),
           ));
         },
         child: const Icon(Icons.add),
